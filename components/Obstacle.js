@@ -1,6 +1,6 @@
 import React from 'react'
 import Matter from 'matter-js'
-import { View } from 'react-native'
+import { View, Image } from 'react-native'
 
 const Obstacle = props => {
     const widthBody = props.body.bounds.max.x - props.body.bounds.min.x
@@ -21,7 +21,13 @@ const Obstacle = props => {
             top: yBody,
             width: widthBody,
             height: heightBody,
-        }}/>
+        }}>
+            <Image 
+                style={{width: widthBody, height: heightBody}}
+                resizeMode='stretch'
+                source={require('../assets/img/pipe_core.png')} />
+            
+        </View>
     )
 }
 

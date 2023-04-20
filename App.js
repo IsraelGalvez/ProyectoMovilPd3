@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import { GameEngine } from 'react-native-game-engine';
 import entities from './entities';
 import Physics from './physics';
@@ -14,42 +14,52 @@ export default function App() {
   }, [])
   return (
     <View style={{flex: 1}}>
-      <Text style={{ textAlign: 'center', fontSize: 40, fontWeight: 'bold', margin: 20 }}>{currentPoints}</Text>
-      <GameEngine
-      ref={(ref) => {setGameEngine(ref) }}
-        systems={[Physics]}
-        entities={entities()}
-        running={running}
-        onEvent={(e) => {
-          switch(e.type) {
-            case 'game_over':
-              setRunning(false)
-              gameEngine.stop()
-              break;
-            case 'new_point':
-              setCurrentPoints(currentPoints + 1)
-              break;
-          }
-        }}
-        style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}
-      >
-        <StatusBar style="auto" hidden={true} />
+      <Text style={{ paddingTop: 30,textAlign: 'center', fontSize: 40, fontWeight: 'bold', backgroundColor: "#79c5ff" }}>{currentPoints}</Text>
+      <ImageBackground
+          style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}
+          resizeMode='cover'
+          source={require('./assets/img/background.png')}
+        >
+          
+            <GameEngine
+              ref={(ref) => {setGameEngine(ref) }}
+                systems={[Physics]}
+                entities={entities()}
+                running={running}
+                onEvent={(e) => {
+                  switch(e.type) {
+                    case 'game_over':
+                      setRunning(false)
+                      gameEngine.stop()
+                      break;
+                    case 'new_point':
+                      setCurrentPoints(currentPoints + 1)
+                      break;
+                  }
+                }}
+                style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}
+              >
+                <StatusBar style="auto" hidden={true} />
+        </GameEngine>
 
-      </GameEngine>
-
-      {!running ? 
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <TouchableOpacity style={{backgroundColor: 'black', paddingHorizontal: 30, paddingVertical: 10}} onPress = {() => {
-            setCurrentPoints(0)
-            setRunning(true)
-            gameEngine.swap(entities())
-          }}>
-            <Text style={{fontWeight: 'bold', color: 'white', fontSize: 30}}>
-              START GAME
-            </Text>
-          </TouchableOpacity>
-        </View> : null}
+        {!running ? 
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <TouchableOpacity style={
+              {backgroundColor: 'black', paddingHorizontal: 30, paddingVertical: 10}} onPress = {() => {
+              setCurrentPoints(0)
+              setRunning(true)
+              gameEngine.swap(entities())
+            }}>
+              <Text style={{fontWeight: 'bold', color: 'white', fontSize: 30}}>
+                START GAME
+              </Text>
+            </TouchableOpacity>
+          </View> : null}
+        </ImageBackground>
+      
+        
     </View>
   );
 }
+
 

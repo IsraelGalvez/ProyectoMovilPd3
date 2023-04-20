@@ -1,6 +1,6 @@
 import React from 'react'
 import Matter from 'matter-js'
-import { View } from 'react-native'
+import { View, Image } from 'react-native'
 
 const Floor = props => {
     const widthBody = props.body.bounds.max.x - props.body.bounds.min.x
@@ -19,7 +19,13 @@ const Floor = props => {
             top: yBody,
             width: widthBody,
             height: heightBody,
-        }}/>
+        }}>
+            <Image 
+                style={{width: 360, height: 25}}
+                resizeMode='stretch'
+                source={require('../assets/img/floor.png')}
+            />
+        </View>
     )
 }
 
