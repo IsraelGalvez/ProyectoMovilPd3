@@ -10,9 +10,6 @@ const Bird = props => {
     const xBody = props.body.position.x - widthBody /2
     const yBody = props.body.position.y - heightBody /2
 
-    const color = props.color;
-    const imageIterations = Math.ceil(widthBody/ heightBody)
-
     return(
         <View style={{
             // borderWidth: 1,

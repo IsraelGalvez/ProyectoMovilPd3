@@ -21,7 +21,7 @@ const Floor = props => {
             height: heightBody,
         }}>
             <Image 
-                style={{width: 360, height: 25}}
+                style={{width: widthBody, height: 50}}
                 resizeMode='stretch'
                 source={require('../assets/img/floor.png')}
             />

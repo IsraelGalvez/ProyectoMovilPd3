@@ -7,7 +7,7 @@ const windowWidth = Dimensions.get('window').width
 
 const Physics = (entities, { touches, time, dispatch }) => {
     let engine = entities.physics.engine
-
+    
     touches.filter(t => t.type === 'press')
         .forEach(t => {
             Matter.Body.setVelocity(entities.Bird.body, {

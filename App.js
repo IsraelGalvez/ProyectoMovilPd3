@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react
 import { GameEngine } from 'react-native-game-engine';
 import entities from './entities';
 import Physics from './physics';
+import { Audio } from 'expo-av';
 
 export default function App() {
   const [running, setRunning] = useState(false)
@@ -14,7 +15,8 @@ export default function App() {
   }, [])
   return (
     <View style={{flex: 1}}>
-      <Text style={{ paddingTop: 30,textAlign: 'center', fontSize: 40, fontWeight: 'bold', backgroundColor: "#79c5ff" }}>{currentPoints}</Text>
+      
+      <Text style={{ paddingTop: 30, textAlign: 'center', fontSize: 40, fontWeight: 'bold', backgroundColor: "#79c5ff" }}>{currentPoints}</Text>
       <ImageBackground
           style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}
           resizeMode='cover'
@@ -62,4 +64,25 @@ export default function App() {
   );
 }
 
+async function componentDidMount() {
+  Audio.setAudioModeAsync({
+    allowsRecordingIOS: false,
+    interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+    playsInSilentModeIOS: true,
+    interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+    shouldDuckAndroid: true,
+    staysActiveInBackground: true,
+    playThroughEarpieceAndroid: true
+  });
+
+  this.sound = new Audio.Sound();
+
+  const status = {
+    shouldPlay: true
+  }
+
+  this.sound.loadAsync(require('./assets/music/8-bit-dream-land-142093.mp3'), status, false)
+}
+
+componentDidMount()
 

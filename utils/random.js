@@ -8,7 +8,7 @@ export const getRandom = (min, max) => {
 }
 
 export const getPipeSizePosPair = (addToPosX = 0) => {
-    let yPosTop = -getRandom(300, windowHeight -100)
+    let yPosTop = -getRandom(300, windowHeight - 200)
 
     const pipeTop = { pos: { x: windowWidth + addToPosX, y: yPosTop }, size: { height: windowHeight * 2, width: 75} }
 
